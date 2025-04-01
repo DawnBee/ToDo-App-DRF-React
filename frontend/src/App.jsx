@@ -1,13 +1,13 @@
 import './App.css'
 import TaskList from './components/TaskList'
-import TaskItem from './components/TaskItem';
+import ListTasks from './components/ListTasks';
 
 function App() {
 
   return (
     <>
-      <TaskList />
-      <TaskItem />
+      {/* <TaskList /> */}
+      <ListTasks />
     </>
   )
 }
