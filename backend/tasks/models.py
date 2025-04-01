@@ -8,6 +8,7 @@ class Task(models.Model):
     completed = models.BooleanField(default=False)
     due_date = models.DateTimeField(blank=True, null=True)
     completed_date = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
