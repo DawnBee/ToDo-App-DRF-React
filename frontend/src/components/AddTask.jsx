@@ -24,31 +24,38 @@ const AddTask = ({ setTasks }) => {
   };
 
   return (
-    <div>
-      {/* Add Task Form */}
-      {isAddFormVisible && (
-        <div>
+  <div className="form-container">
+    {!isAddFormVisible && (
+      <button className="add-btn" onClick={() => setIsAddFormVisible(true)}>
+        Add Task
+      </button>
+    )}
+
+    {/* Modal for adding task */}
+    {isAddFormVisible && (
+      <div className="modal-overlay">
+        <div className="modal-content">
+          <h2>Add New Task</h2>
           <input
             type="text"
             value={newTaskName}
             onChange={(e) => setNewTaskName(e.target.value)}
-            placeholder="Task name"
+            placeholder="name"
           />
           <textarea
             value={newTaskDescription}
             onChange={(e) => setNewTaskDescription(e.target.value)}
-            placeholder="Task description"
+            placeholder="description"
           />
-          <button onClick={handleAddTask}>Add Task</button>
-          <button onClick={() => setIsAddFormVisible(false)}>Cancel</button>
+          <div className="modal-btns">
+            <button className="add-btn" onClick={handleAddTask}>Add Task</button>
+            <button className="cancel-btn" onClick={() => setIsAddFormVisible(false)}>Cancel</button>
+          </div>
         </div>
-      )}
+      </div>
+    )}
+  </div>
 
-      {/* Show the Add Task button when form is hidden */}
-      {!isAddFormVisible && (
-        <button onClick={() => setIsAddFormVisible(true)}>Add Task</button>
-      )}
-    </div>
   );
 };
 
