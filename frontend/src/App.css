@@ -9,7 +9,7 @@ body {
   display: grid;
   place-items: center;
   background-color: #CBD7E3;
-  font-family: 'Roboto', monospace;
+  font-family: 'Montserrat', sans-serif;
 }
 
 h1, h2, h3, h4, ul {
@@ -25,6 +25,24 @@ button {
   padding: .5rem 1rem;
 }
 
+.logo-box {
+  gap: 1rem;
+  display: flex;
+  margin-bottom: 3em;
+  align-items: center;
+}
+
+.logo-box h1 {
+  color: #0E1860; 
+  font-size: 5rem;
+  font-weight: 800;
+}
+
+.logo-box img {
+  width: 150px;
+  aspect-ratio: 1;
+}
+
 .tasks-container {
   padding: 2em;
   text-align: center;
@@ -35,7 +53,8 @@ button {
 }
 
 .tasks-container h2 {
-  color: #43585E;
+  color: #1778FD;
+  font-weight: 700;
   font-size: 2.5rem;
 }
 
@@ -52,9 +71,16 @@ button {
   justify-content: space-between;
 }
 
+.task-item .task-checkbox {
+  width: 25px;
+  display: block;
+  aspect-ratio: 1;
+}
+
 .task-item .task-name {
   color: blue;
   cursor: pointer;
+  font-weight: 600;
 }
 
 .task-item .task-name:hover {
