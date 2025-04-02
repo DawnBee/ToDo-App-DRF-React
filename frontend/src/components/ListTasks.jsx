@@ -1,12 +1,14 @@
 import axios from "axios";
+import { useState, useEffect } from "react";
 import AddTask from "./AddTask";
 import UpdateTask from "./UpdateTask";
 import DeleteTask from "./DeleteTask";
+import DetailTask from "./DetailTask";
 import { API_BASE_URL } from "../api";
-import { useState, useEffect } from "react";
 
 const ListTasks = () => {
   const [tasks, setTasks] = useState([]);
+  const [selectedTask, setSelectedTask] = useState(null);
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -56,7 +58,12 @@ const ListTasks = () => {
                 onChange={() => handleCheckboxChange(task.id, task.completed)}
                 className="task-checkbox"
               />
-              <p className={task.completed ? "completed-task" : ""}>{task.name}</p>
+              <p
+                className={`task-name ${task.completed ? "completed-task" : ""}`}
+                onClick={() => setSelectedTask(task)}
+              >
+                {task.name}
+              </p>
               <div className="item-btn-wrap">
                 <UpdateTask task={task} setTasks={setTasks} />
                 <DeleteTask taskId={task.id} setTasks={setTasks} />
@@ -64,6 +71,10 @@ const ListTasks = () => {
             </li>
           ))}
         </ul>
+      )}
+
+      {selectedTask && (
+        <DetailTask task={selectedTask} onClose={() => setSelectedTask(null)} />
       )}
     </div>
   );

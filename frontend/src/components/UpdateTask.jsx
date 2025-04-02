@@ -77,30 +77,39 @@ const UpdateTask = ({ task, setTasks }) => {
               }
               placeholder="Task Description"
             />
-            <select
-              value={editTask.priority}
-              onChange={(e) =>
-                setEditTask({ ...editTask, priority: e.target.value })
-              }
-            >
-              {PRIORITY_OPTIONS.map((priority) => (
-                <option key={priority} value={priority}>
-                  {priority}
-                </option>
-              ))}
-            </select>
-            <select
-              value={editTask.category}
-              onChange={(e) =>
-                setEditTask({ ...editTask, category: e.target.value })
-              }
-            >
-              {CATEGORY_OPTIONS.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
+            <div className="dropdown-wrap">
+              <div style={{gap:".3rem", display:"flex", justifyContent:"center", alignItems:"center"}}>
+                <p style={{fontWeight:"500"}}>Priority:</p>
+                <select
+                  value={editTask.priority}
+                  onChange={(e) =>
+                    setEditTask({ ...editTask, priority: e.target.value })
+                  }
+                >
+                  {PRIORITY_OPTIONS.map((priority) => (
+                    <option key={priority} value={priority}>
+                      {priority}
+                    </option>
+                  ))}
+                </select>              
+              </div>
+              <div style={{gap:".3rem", display:"flex", justifyContent:"center", alignItems:"center"}}>
+                <p style={{fontWeight:"500"}}>Category:</p>
+                <select
+                  value={editTask.category}
+                  onChange={(e) =>
+                    setEditTask({ ...editTask, category: e.target.value })
+                  }
+                >
+                  {CATEGORY_OPTIONS.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>                
+              </div>
+            </div>
+            <p style={{textAlign: "initial", fontWeight: "600"}}>Attachments:</p>
             <input
               type="file"
               accept="image/*"

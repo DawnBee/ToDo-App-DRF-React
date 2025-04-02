@@ -52,6 +52,16 @@ button {
   justify-content: space-between;
 }
 
+.task-item .task-name {
+  color: blue;
+  cursor: pointer;
+}
+
+.task-item .task-name:hover {
+  color: green;
+  text-decoration: underline;
+}
+
 .btn-wrap {
   display: flex;
   margin: 1rem 0;
@@ -94,10 +104,26 @@ button {
   height: 2rem;
   margin: 1rem 0;
   display: block;
+  border-radius: 3px;
+  border: 2px solid #ccc;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.modal-content input:hover,
+.modal-content textarea:hover,
+.modal-content textarea:focus,
+.modal-content textarea:active {
+  border-color: #5a9cff;
+}
+
+.modal-content input {
+  padding: 5px;
+  outline: none;
 }
 
 .modal-content textarea {
   min-height: 8em;
+  resize: vertical;
 }
 
 .modal-content {
@@ -107,6 +133,17 @@ button {
   background: #fff;
   border-radius: 5px;
   box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.dropdown-wrap {
+  gap: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown-wrap select {
+  min-height: 1.5rem;
 }
 
 .checkbox-wrap {
@@ -147,4 +184,20 @@ button {
 .completed-task {
   color: #6c757d;
   text-decoration: line-through;
+}
+
+.date-wrap {
+  gap: .5rem;
+  display: flex;
+  font-weight: 600;
+  align-items: center;
+}
+
+.date-wrap input {
+  display: block;
+}
+
+.date-wrap p {
+  min-width: 20%;
+  font-size: 1rem;
 }
