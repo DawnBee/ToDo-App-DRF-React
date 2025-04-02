@@ -10,7 +10,7 @@ const AddTask = ({ setTasks }) => {
   const [newTaskDescription, setNewTaskDescription] = useState("");
   const [newTaskPriority, setNewTaskPriority] = useState(PRIORITY_OPTIONS[0]);
   const [newTaskCategory, setNewTaskCategory] = useState(CATEGORY_OPTIONS[0]);
-  const [newTaskDueDate, setNewTaskDueDate] = useState(""); // <-- Added due date state
+  const [newTaskDueDate, setNewTaskDueDate] = useState("");
   const [attachmentImage, setAttachmentImage] = useState(null);
   const [isAddFormVisible, setIsAddFormVisible] = useState(false);
 
@@ -27,7 +27,7 @@ const AddTask = ({ setTasks }) => {
     formData.append("category", newTaskCategory);
     
     if (newTaskDueDate) {
-      formData.append("due_date", newTaskDueDate); // <-- Append due date
+      formData.append("due_date", newTaskDueDate);
     }
     
     if (attachmentImage) {
@@ -47,7 +47,7 @@ const AddTask = ({ setTasks }) => {
       setNewTaskDescription("");
       setNewTaskPriority(PRIORITY_OPTIONS[0]);
       setNewTaskCategory(CATEGORY_OPTIONS[0]);
-      setNewTaskDueDate(""); // <-- Reset due date
+      setNewTaskDueDate("");
       setAttachmentImage(null);
       setIsAddFormVisible(false);
     } catch (error) {
@@ -106,7 +106,6 @@ const AddTask = ({ setTasks }) => {
               </div>
             </div>
             
-            {/* New Due Date Input */}
             <div className="date-wrap">
               <p>Due Date:</p>
               <input

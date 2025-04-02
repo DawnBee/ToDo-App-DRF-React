@@ -10,8 +10,6 @@ const DetailTask = ({ task, onClose }) => {
             <p><strong>Priority:</strong> {task.priority}</p>
             <p><strong>Category:</strong> {task.category}</p>
             <p><strong>Due Date:</strong> {new Date(task.due_date).toLocaleDateString()}</p>
-
-
             <button className="cancel-btn" onClick={onClose}>Close</button>
         </div>
       </div>
