@@ -1,0 +1,23 @@
+[
+    {
+        "model": "tasks.category",
+        "pk": "c3e8ed44-86f9-4729-b170-615be1e97cf9",
+        "fields": {
+            "name": "Personal"
+        }
+    },
+    {
+        "model": "tasks.category",
+        "pk": "f907d83a-f4a1-45ae-b4c0-3b3b5649289e",
+        "fields": {
+            "name": "Work"
+        }
+    },
+    {
+        "model": "tasks.category",
+        "pk": "d0f8b80f-dde6-420f-bc8c-36e51f9928a1",
+        "fields": {
+            "name": "Others"
+        }
+    }
+]
