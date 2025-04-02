@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import { API_BASE_URL } from "../api";
-import DeleteTask from "./DeleteTask";
-import UpdateTask from "./UpdateTask";
-import AddTask from "./AddTask";
 import axios from "axios";
+import AddTask from "./AddTask";
+import UpdateTask from "./UpdateTask";
+import DeleteTask from "./DeleteTask";
+import { API_BASE_URL } from "../api";
+import { useState, useEffect } from "react";
 
 const ListTasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -27,10 +27,6 @@ const ListTasks = () => {
           task.id === taskId ? { ...task, completed: !completed } : task
         )
       );
-
-      const updatedTask = await axios.patch(`${API_BASE_URL}/tasks/${taskId}/`, {
-        completed: !completed
-      });
     } catch (error) {
       console.error("Error updating task completion:", error);
       setTasks((prevTasks) =>
@@ -48,23 +44,27 @@ const ListTasks = () => {
         <AddTask setTasks={setTasks} />
       </div>
 
-      <ul className="tasks-list">
-        {tasks.map((task) => (
-          <li key={task.id} className="task-item">
-            <input
-              type="checkbox"
-              checked={task.completed}
-              onChange={() => handleCheckboxChange(task.id, task.completed)}
-              className="task-checkbox"
-            />
-            <p className={task.completed ? "completed-task" : ""}>{task.name}</p>
-            <div className="item-btn-wrap">
-              <UpdateTask task={task} setTasks={setTasks} />
-              <DeleteTask taskId={task.id} setTasks={setTasks} />
-            </div>
-          </li>
-        ))}
-      </ul>
+      {tasks.length === 0 ? (
+        <div className="empty-tasks">No tasks available. Add a new task!</div>
+      ) : (
+        <ul className="tasks-list">
+          {tasks.map((task) => (
+            <li key={task.id} className="task-item">
+              <input
+                type="checkbox"
+                checked={task.completed}
+                onChange={() => handleCheckboxChange(task.id, task.completed)}
+                className="task-checkbox"
+              />
+              <p className={task.completed ? "completed-task" : ""}>{task.name}</p>
+              <div className="item-btn-wrap">
+                <UpdateTask task={task} setTasks={setTasks} />
+                <DeleteTask taskId={task.id} setTasks={setTasks} />
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

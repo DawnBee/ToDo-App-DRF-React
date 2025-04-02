@@ -1,12 +1,16 @@
 import axios from "axios";
-import { useState } from "react";
 import { API_BASE_URL } from "../api";
-import { faEdit  } from "@fortawesome/free-solid-svg-icons";
+import { useState, useEffect } from "react";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const UpdateTask = ({ task, setTasks }) => {
   const [editTask, setEditTask] = useState({ ...task });
   const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    setEditTask({ ...task });
+  }, [task]);
 
   const handleUpdate = async () => {
     try {
@@ -57,8 +61,12 @@ const UpdateTask = ({ task, setTasks }) => {
               <p>Completed</p>
             </div>
             <div className="modal-btns">
-              <button className="update-btn" onClick={handleUpdate}>Update</button>
-              <button className="cancel-btn" onClick={() => setIsEditing(false)}>Cancel</button>
+              <button className="update-btn" onClick={handleUpdate}>
+                Update
+              </button>
+              <button className="cancel-btn" onClick={() => setIsEditing(false)}>
+                Cancel
+              </button>
             </div>
           </div>
         </div>

@@ -133,7 +133,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 JAZZMIN_SETTINGS = {
     "site_title": "ToDo",
-    "site_header": "ToDo - App",
+    "site_header": "ToDo",
     "site_brand": "ToDo - App",
     "site_logo": "",
     "login_logo": "",
