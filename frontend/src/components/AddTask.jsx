@@ -45,7 +45,7 @@ const AddTask = ({ setTasks }) => {
       setIsAddFormVisible(false);
     } catch (error) {
       console.error("Error adding task:", error.response?.data || error.message);
-      alert("Failed to add task. Please try again.");
+      alert("Failed to add task, make sure it has a unique name!");
     }
   };
 

@@ -5,13 +5,16 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const PRIORITY_OPTIONS = ["Urgent", "High", "Normal"];
+const CATEGORY_OPTIONS = ["Personal", "Work", "Others"];
 
 const UpdateTask = ({ task, setTasks }) => {
   const [editTask, setEditTask] = useState({ ...task });
   const [isEditing, setIsEditing] = useState(false);
+  const [attachmentImage, setAttachmentImage] = useState(null);
 
   useEffect(() => {
     setEditTask({ ...task });
+    setAttachmentImage(task.attachment_image || null);
   }, [task]);
 
   const handleUpdate = async () => {
@@ -20,13 +23,24 @@ const UpdateTask = ({ task, setTasks }) => {
       return;
     }
 
+    const formData = new FormData();
+    formData.append("name", editTask.name.trim());
+    formData.append("description", editTask.description.trim());
+    formData.append("priority", editTask.priority);
+    formData.append("category", editTask.category);
+    formData.append("completed", editTask.completed);
+    if (attachmentImage) {
+      formData.append("attachment", attachmentImage);
+    }
+
     try {
       const response = await axios.patch(
         `${API_BASE_URL}/tasks/${editTask.id}/`,
+        formData,
         {
-          ...editTask,
-          name: editTask.name.trim(),
-          description: editTask.description.trim(),
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
 
@@ -75,6 +89,23 @@ const UpdateTask = ({ task, setTasks }) => {
                 </option>
               ))}
             </select>
+            <select
+              value={editTask.category}
+              onChange={(e) =>
+                setEditTask({ ...editTask, category: e.target.value })
+              }
+            >
+              {CATEGORY_OPTIONS.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setAttachmentImage(e.target.files[0])}
+            />
             <div className="checkbox-wrap">
               <input
                 type="checkbox"
