@@ -122,7 +122,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+import os
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "backend/static"),
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -133,8 +142,8 @@ JAZZMIN_SETTINGS = {
     "site_title": "ToDo",
     "site_header": "ToDo",
     "site_brand": "ToDo - App",
-    "site_logo": "",
-    "login_logo": "",
+    "site_logo": "imgs/meddicc-logo.png",
+    "login_logo": "imgs/meddicc-logo.png",
     "login_logo_dark": None,
     "site_logo_classes": "img-circle",
     "site_icon": None,
