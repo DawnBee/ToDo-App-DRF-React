@@ -3,11 +3,14 @@ import { useState } from "react";
 import { API_BASE_URL } from "../api";
 
 const PRIORITY_OPTIONS = ["Urgent", "High", "Normal"];
+const CATEGORY_OPTIONS = ["Personal", "Work", "Others"];
 
 const AddTask = ({ setTasks }) => {
   const [newTaskName, setNewTaskName] = useState("");
   const [newTaskDescription, setNewTaskDescription] = useState("");
   const [newTaskPriority, setNewTaskPriority] = useState(PRIORITY_OPTIONS[0]);
+  const [newTaskCategory, setNewTaskCategory] = useState(CATEGORY_OPTIONS[0]);
+  const [attachmentImage, setAttachmentImage] = useState(null);
   const [isAddFormVisible, setIsAddFormVisible] = useState(false);
 
   const handleAddTask = async () => {
@@ -16,19 +19,29 @@ const AddTask = ({ setTasks }) => {
       return;
     }
 
+    const formData = new FormData();
+    formData.append("name", newTaskName.trim());
+    formData.append("description", newTaskDescription.trim());
+    formData.append("priority", newTaskPriority);
+    formData.append("category", newTaskCategory);
+    if (attachmentImage) {
+      formData.append("attachment", attachmentImage);
+    }
+
     try {
-      const response = await axios.post(`${API_BASE_URL}/tasks/`, {
-        name: newTaskName.trim(),
-        description: newTaskDescription.trim(),
-        priority: newTaskPriority,
+      const response = await axios.post(`${API_BASE_URL}/tasks/`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
 
       setTasks((prevTasks) => [...prevTasks, response.data]);
 
-      // Reset form
       setNewTaskName("");
       setNewTaskDescription("");
       setNewTaskPriority(PRIORITY_OPTIONS[0]);
+      setNewTaskCategory(CATEGORY_OPTIONS[0]);
+      setAttachmentImage(null);
       setIsAddFormVisible(false);
     } catch (error) {
       console.error("Error adding task:", error.response?.data || error.message);
@@ -67,6 +80,21 @@ const AddTask = ({ setTasks }) => {
                 </option>
               ))}
             </select>
+            <select
+              value={newTaskCategory}
+              onChange={(e) => setNewTaskCategory(e.target.value)}
+            >
+              {CATEGORY_OPTIONS.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setAttachmentImage(e.target.files[0])}
+            />
             <div className="modal-btns">
               <button className="add-btn" onClick={handleAddTask}>
                 Add Task
