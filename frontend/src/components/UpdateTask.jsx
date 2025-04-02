@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+const PRIORITY_OPTIONS = ["Urgent", "High", "Normal"];
+
 const UpdateTask = ({ task, setTasks }) => {
   const [editTask, setEditTask] = useState({ ...task });
   const [isEditing, setIsEditing] = useState(false);
@@ -13,17 +15,28 @@ const UpdateTask = ({ task, setTasks }) => {
   }, [task]);
 
   const handleUpdate = async () => {
+    if (!editTask.name.trim()) {
+      alert("Task name cannot be empty!");
+      return;
+    }
+
     try {
       const response = await axios.patch(
         `${API_BASE_URL}/tasks/${editTask.id}/`,
-        editTask
+        {
+          ...editTask,
+          name: editTask.name.trim(),
+          description: editTask.description.trim(),
+        }
       );
+
       setTasks((prevTasks) =>
         prevTasks.map((item) => (item.id === editTask.id ? response.data : item))
       );
       setIsEditing(false);
     } catch (error) {
-      console.error("Error updating task:", error);
+      console.error("Error updating task:", error.response?.data || error.message);
+      alert("Failed to update task. Please try again.");
     }
   };
 
@@ -50,6 +63,18 @@ const UpdateTask = ({ task, setTasks }) => {
               }
               placeholder="Task Description"
             />
+            <select
+              value={editTask.priority}
+              onChange={(e) =>
+                setEditTask({ ...editTask, priority: e.target.value })
+              }
+            >
+              {PRIORITY_OPTIONS.map((priority) => (
+                <option key={priority} value={priority}>
+                  {priority}
+                </option>
+              ))}
+            </select>
             <div className="checkbox-wrap">
               <input
                 type="checkbox"
