@@ -1,0 +1,23 @@
+[
+    {
+        "model": "tasks.priority",
+        "pk": "7c903daf-1c3e-4138-801e-fcd63ca69207",
+        "fields": {
+            "level": "Urgent"
+        }
+    },
+    {
+        "model": "tasks.priority",
+        "pk": "d2c6d145-e711-47d0-aaf9-fb5e1d4f84b2",
+        "fields": {
+            "level": "High"
+        }
+    },
+    {
+        "model": "tasks.priority",
+        "pk": "f63e0b84-4798-4d84-82f2-9a8a7e75ec5f",
+        "fields": {
+            "level": "Normal"
+        }
+    }
+]
