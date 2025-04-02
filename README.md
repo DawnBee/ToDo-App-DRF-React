@@ -16,3 +16,7 @@ You can do this by navigating to the ```backend``` directory and then running th
 ```python manage.py loaddata tasks/fixtures/*.json```
 
 These custom fixtures will pre-populate the 'Priority' and 'Category' models.
+
+## Sample Images
+![Sample-1](images/img-1.png)
+![Sample-1](images/img-2.png)
