@@ -40,6 +40,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
+    'https://todo-app-frontend-nbbb.onrender.com'
 ]
 
 ROOT_URLCONF = 'backend.urls'
